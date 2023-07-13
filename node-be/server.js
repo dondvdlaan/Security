@@ -13,12 +13,12 @@ const cookieParser  = require("cookie-parser");
 require('dotenv').config()
 
 // ---- Modules ----
-const sessionStore  = require('./util/sessionDB');
-const routes        = require('./routes/routes')
-const authRoute     = require('./routes/authRoute')
-// Authentication by Passport configuration
-const auth		    = require('./conf/auth')
-const userPool		= require('./util/userDB')
+const sessionStore  	= require('./util/sessionDB');
+const routes        	= require('./routes/routes')
+const authRoute     	= require('./routes/authRoute')
+// configuration of Passport Authentication  
+const auth		    	= require('./conf/auth')
+const userPool			= require('./util/userDB')
 
 // ---- Constants ----
 const port 			= 4500;
@@ -33,7 +33,8 @@ const corsOptions = {
 // req.body is populated 
 server.use(express.json());
 server.use(cors(corsOptions));
-server.use(cookieParser());
+//server.use(cookieParser("some super secret thing, please do not copy this"));
+//server.use(doubleCsrfProtection);
 
 server.use(function(req, res, next) {  
 	//res.header('Access-Control-Allow-Origin', "*");
@@ -49,25 +50,15 @@ server.use(function(req, res, next) {
  * it only saves the session ID in the cookie itself
  */ 
 server.use(session({
-	key: 'session_cookie_name',
-	secret: 'session_cookie_secret',
+	secret: 'Holita',
+	//key: 'session_cookie_name',
 	store: sessionStore,
-	user: "Patito",
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 4,
-        //maxAge: 1000 * 60 * 60 * 24,
-        httpOnly: false,
-		domain: 'http://localhost:3000',
-		path: '/',
-		//expires: expiryDate
-    },
 	resave: false,
 	saveUninitialized: false,
-	name: 'Holita',
-	//rolling: true
-
 }));
-server.use(passport.authenticate('session'));
+server.use(passport.session());
+server.use(passport.initialize());
+//server.use(passport.authenticate('session'));
 
 // ---- Start server ----
 const init = () =>{

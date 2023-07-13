@@ -17,7 +17,7 @@ sessionStore.onReady().then(() => {
 	console.log('MySQLStore ready');
 }).catch(error => {
 	// Something went wrong.
-	console.error("sessionStore: " ,error);
+	console.error("sessionStore: ", error);
 });
 
 module.exports = sessionStore;

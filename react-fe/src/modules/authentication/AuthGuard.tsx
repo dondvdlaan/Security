@@ -30,8 +30,8 @@ type LoginProps = {
 function AuthGuard(props: LoginProps ) {
 
   const[loggedIn, setLoggedIn]  = useState(false)
-  const[error, setError]  = useState(" ")
-  const navigate          = useNavigate();
+  const[error, setError]        = useState(" ")
+  const navigate                = useNavigate();
 
   console.log("AuthGuard document.cookie: " , document.cookie)
   
@@ -40,7 +40,10 @@ function AuthGuard(props: LoginProps ) {
 
     if(document.cookie){
       let jwtAccess = getCookie('JWT_ACCESS');
-      localStorage.setItem("X-ACCESS_TOKEN", jwtAccess);
+      localStorage.setItem("X-ACCESS-TOKEN", jwtAccess);
+      
+      //let csrfToken = getCookie('XSRF-TOKEN');
+      //localStorage.setItem("XSRF-TOKEN", csrfToken);
 
       setLoggedIn(true);
     } 

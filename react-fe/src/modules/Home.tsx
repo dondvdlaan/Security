@@ -48,23 +48,36 @@ function Home() {
       if(err.response.status == 401) navigate("/login")
     })
   }
+  const getCSRF = () =>{
 
-  const onGreet2 = () =>{
-
-    ApiSimplified("GET","greeting2")
+    ApiSimplified("GET","csrf-token")
     .then(res => {
-      console.log("Greet2 cookie: " , res.headers)
-      console.log("Greet2: " , res)})
+      console.log("getCSRF: " , res.data.token)
+    let csrfToken = res.data.token;
+    localStorage.setItem("x-csrf-test", csrfToken);
+    })
+    .catch(err =>{
+      console.log("foutje: ", err.response.status)
+      //if(err.response.status == 401) navigate("/login")
+    })
   }
 
-  
+  const onCSRF = () =>{
+
+    ApiSimplified("POST","addUser", cred)
+    .then(res => {
+      console.log("onCSRF: " , res)})
+  }
+
+ 
 
   return (
     <div className="App">
       
     <h2>Testing Security</h2>
     <button onClick={onGreet} type="button">Greeting</button>
-    <button onClick={onGreet2} type="button">Greeting2</button>
+    <button onClick={getCSRF} type="button">get CSRF Token</button>
+    <button onClick={onCSRF} type="button">POST add names</button>
     <div>
       <button onClick={onAuth} type="button">Authentication</button>
       <p>{error}</p>

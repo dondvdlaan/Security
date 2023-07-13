@@ -1,22 +1,26 @@
 const passport          = require("passport");
-
-const generateJwtAccess = require('../middleware/generateJWTAccess')
+const generateJwtAccess = require("../middleware/generateJWTAccess");
+const sameOrigin        = require("../middleware/sameOrigin");
+const {generateToken, 
+	doubleCsrfProtection}	= require("../middleware/csrfProtections.js");
 
 
 const authRoute = (server) =>{
 
 
-    server.post('/api/auth', 
+    server.post('/api/auth', sameOrigin,
     
     passport.authenticate('local', {
         //successReturnToOrRedirect: 'http://localhost:4500/api/auth/cb',
         failureRedirect: 'http://localhost:4500/api/auth/cb/err',
         failureMessage: true
-    }),
+    }), 
     (req,res) => {
+
         console.log("\n ****** in authRoute ****** " )
         console.log("auth", req.user[0].userID)
         
+        // userID is converted in JWR token
         const jwtAccess = generateJwtAccess(req.user[0].userID);
         //console.log({jwt_access})
 
@@ -31,6 +35,7 @@ const authRoute = (server) =>{
             path: "/",
             httpOnly: false,
         });
+      
 
         res.status(200).send("Authorization OK")
     }),

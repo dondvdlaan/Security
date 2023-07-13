@@ -1,15 +1,35 @@
-const isAuth = require("../middleware/isAuth")
+const isAuth            = require("../middleware/isAuth")
 
 
 const routes = (server) =>{
 
-    server.get('/greeting', isAuth, (req, res) =>{
+
+    server.post('/addUser', (req, res) =>{
+
+        console.log("\n ************ /addUser *********** \n");
+
+        console.log("user:", req.body)
+
+        res.ok.send("User received")
+
+    }),
+
+    server.get('/greeting', 
+    isAuth,
+     (req, res) =>{
 
         console.log("\n ************ /greeting *********** \n");
 
-        console.log("\n req user")
-        console.log(req.user)
-        
+        console.log("\n req ")
+        //console.log(req)
+
+        /*
+          // Create CSRF token to check POST, PUT, DELETE, and PATCH requests
+          res.cookie("XSRF-TOKEN", req.csrfToken(), {
+            path: "/",
+            httpOnly: false,
+        });
+        */
         /*
         console.log("\n session data");
         console.log(req.session);
