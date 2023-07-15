@@ -3,8 +3,12 @@ const jwt = require('jsonwebtoken');
 /**
  * Generate JWT Access Token
  */
-const generateJwtAccess = function (user_id) {
-    return jwt.sign({ user: user_id }, process.env.REACT_APP_JWT_SECRET_CODE)
+const generateJwtAccess = function (userID) {
+    return jwt.sign(
+        { userID }, 
+        process.env.JWT_ACCESS_SECRET,
+        { expiresIn: "30s" }
+        )
 };
 
 module.exports = generateJwtAccess;

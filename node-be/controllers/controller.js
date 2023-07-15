@@ -1,16 +1,17 @@
 const isAuth            = require("../middleware/isAuth")
+const sameOrigin        = require("../middleware/sameOrigin");
 
 
-const routes = (server) =>{
+const controller = (server) =>{
 
 
-    server.post('/addUser', (req, res) =>{
+    server.post('/addUser', sameOrigin, isAuth, (req, res) =>{
 
         console.log("\n ************ /addUser *********** \n");
 
         console.log("user:", req.body)
 
-        res.ok.send("User received")
+        res.sendStatus(200);
 
     }),
 
@@ -112,4 +113,4 @@ const routes = (server) =>{
     })
 }
 
-module.exports = routes;
+module.exports = controller;

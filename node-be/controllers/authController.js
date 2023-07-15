@@ -1,11 +1,15 @@
 const passport          = require("passport");
 const generateJwtAccess = require("../middleware/generateJWTAccess");
+const generateJwtSecret = require("../middleware/generateJWTSecret");
 const sameOrigin        = require("../middleware/sameOrigin");
-const {generateToken, 
-	doubleCsrfProtection}	= require("../middleware/csrfProtections.js");
+const isAuth            = require("../middleware/isAuth");
+const {refreshToken,
+    createSession }      = require("./authRoute")
 
+const authController = (server) =>{
 
-const authRoute = (server) =>{
+    server.post('/api/auth/refresh', sameOrigin,
+   refreshToken()),
 
 
     server.post('/api/auth', sameOrigin,
@@ -15,6 +19,8 @@ const authRoute = (server) =>{
         failureRedirect: 'http://localhost:4500/api/auth/cb/err',
         failureMessage: true
     }), 
+    createSession()
+    /*
     (req,res) => {
 
         console.log("\n ****** in authRoute ****** " )
@@ -22,22 +28,10 @@ const authRoute = (server) =>{
         
         // userID is converted in JWR token
         const jwtAccess = generateJwtAccess(req.user[0].userID);
+        const jwtSecret = generateJwtSecret(req.user[0].userID);
         //console.log({jwt_access})
 
-        /*
-        res.cookie("X-XSRF-TOKEN", "XSRF-TOKEN-TEST", {
-            path: "/",
-            httpOnly: false,
-        });
-        */
-        res.cookie("JWT_ACCESS", jwtAccess, {
-            maxAge: 60 * 60 * 24 * 1000,
-            path: "/",
-            httpOnly: false,
-        });
-      
-
-        res.status(200).send("Authorization OK")
+        res.status(200).send({jwtAccess})
     }),
 
     server.get('/api/auth/cb', 
@@ -51,11 +45,11 @@ const authRoute = (server) =>{
                 path: "/",
                 httpOnly: false,
             });
-            */
+           
             res.status(200).send("todo bien")
-        }
+        }*/
     ),
-
+ 
     server.get('/api/auth/cb/err', 
     (req,res) => {
       
@@ -66,4 +60,4 @@ const authRoute = (server) =>{
 
 }
 
-module.exports = authRoute;
+module.exports = authController;

@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import '../App.css';
 import { ApiSimplified } from '../shared/Api';
 import { Link, useNavigate } from 'react-router-dom';
+import { JWT } from '../Types/JWT';
+import { AxiosResponse } from 'axios';
 
 function Home() {
 
@@ -24,11 +26,11 @@ function Home() {
   const onAuth = () =>{
 
     ApiSimplified("POST","api/auth", cred)
-    .then(res => {
-      console.log("document.cookie: " , document.cookie)
-      console.log("Auth cookie: " , res.headers['Set-Cookie'])
-      console.log("Auth: " , res)
-      navigate("/secondPage")
+    .then((res: AxiosResponse<any, any> )=> {
+      console.log("Auth: " , res.data.jwtAccess)
+      let jwtAccess = res.data.jwtAccess
+      localStorage.setItem("X-ACCESS-TOKEN", jwtAccess);
+      //navigate("/secondPage")
     })
     .catch(err => {
       console.log("AuthErr: " , err.response.data) 

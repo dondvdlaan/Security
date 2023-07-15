@@ -14,8 +14,8 @@ require('dotenv').config()
 
 // ---- Modules ----
 const sessionStore  	= require('./util/sessionDB');
-const routes        	= require('./routes/routes')
-const authRoute     	= require('./routes/authRoute')
+const controller        	= require('./controllers/controller')
+const authController     	= require('./controllers/authController')
 // configuration of Passport Authentication  
 const auth		    	= require('./conf/auth')
 const userPool			= require('./util/userDB')
@@ -34,7 +34,6 @@ const corsOptions = {
 server.use(express.json());
 server.use(cors(corsOptions));
 //server.use(cookieParser("some super secret thing, please do not copy this"));
-//server.use(doubleCsrfProtection);
 
 server.use(function(req, res, next) {  
 	//res.header('Access-Control-Allow-Origin', "*");
@@ -64,8 +63,8 @@ server.use(passport.initialize());
 const init = () =>{
 
 	// Routes
-    authRoute(server);
-    routes(server);
+    authController(server);
+    controller(server);
 
     server.listen(port, err=> console.log(err || `server at ${port}`))
 }

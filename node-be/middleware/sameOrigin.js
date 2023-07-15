@@ -1,5 +1,5 @@
 /**
- * Check same origin
+ * Check same origin in header of request
  */
 
 const sameOrigin = (req, res, next) => {

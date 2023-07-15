@@ -1,6 +1,7 @@
 import axios, { Method } from "axios";
 import UpdateHeaderInterceptor from './UpdateHeaderInterceptor'
 import UpdateCookiesInterceptor from "./UpdateCookiesInterceptor";
+import Error401RefreshTokenInterceptor from "./Error401RefreshTokenInterceptor";
 
 // ********************* Constanten und Typen *********************
 const baseUrl = `http://localhost:4500/`;
@@ -26,22 +27,11 @@ export function ApiSimplified<T>(method: Method, path: string, data = {}) {
 
     console.log('API simple config:',config);
 
-    // Set default header
-    //axios.defaults.headers.common['Authorization'] = "QWERTY";
-
+    // ---- Interceptors ----
     UpdateHeaderInterceptor(axios);
+    Error401RefreshTokenInterceptor(axios);
     //UpdateCookiesInterceptor(axios);
 
-    /*
-    axios.interceptors.request.use(function (config) {
-        // Do something before request is sent
-        config.headers["Authorization"] = "abc";
-        return config;
-      }, function (error) {
-        // Do something with request error
-        return Promise.reject(error);
-      });
-      */
 
     
     return axios(config)

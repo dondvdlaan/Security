@@ -23,13 +23,22 @@ function Login() {
     ApiSimplified("POST","api/auth", cred)
     .then(res => {
 
+      let accessToken = null
+      let refreshToken = null
+
       console.log("\n *********** Login **********")
-      console.log("document.cookie: " , document.cookie)
-      console.log("Auth cookie: " , res.headers['Set-Cookie'])
-      console.log("Auth: " , res)
-      if(document.cookie) navigate("/home")
+      console.log("onAuth: " , res.data)
+
+      accessToken = res.data.jwtAccess
+      refreshToken = res.data.jwtSecret
+
+      localStorage.setItem("X-ACCESS-TOKEN", accessToken);
+      localStorage.setItem("X-REFRESH-TOKEN",refreshToken);
+
+      if(res.data) navigate("/home")
     
     })
+    .catch(err => console.log("Login err", err))
   }
 
   return(

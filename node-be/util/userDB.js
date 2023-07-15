@@ -20,6 +20,7 @@ const findUser = (userName) => {
     let userExist = false;
 
     return new Promise((response, rej) => {
+
         userPool.execute(
         `SELECT * FROM users
         WHERE userName = ?`, 
@@ -48,6 +49,7 @@ findUser(userName)
 
         let salt            = crypto.randomBytes(16);
         let hashedPassword  = crypto.pbkdf2Sync(password, salt, 310000, 32, 'sha256')
+        let jwtAccess
 
         userPool.execute(`INSERT INTO users (userName, hashedPassword, salt) VALUES (?, ?, ?)`,
         [userName, hashedPassword, salt],

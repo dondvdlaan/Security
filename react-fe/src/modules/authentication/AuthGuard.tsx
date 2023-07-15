@@ -33,21 +33,21 @@ function AuthGuard(props: LoginProps ) {
   const[error, setError]        = useState(" ")
   const navigate                = useNavigate();
 
-  console.log("AuthGuard document.cookie: " , document.cookie)
   
+  let jwtAccess = localStorage.getItem("X-ACCESS-TOKEN")
+  
+  console.log("AuthGuard localStorage: " , jwtAccess)
 
   useEffect(() => {
 
-    if(document.cookie){
-      let jwtAccess = getCookie('JWT_ACCESS');
-      localStorage.setItem("X-ACCESS-TOKEN", jwtAccess);
+    if(jwtAccess){
       
       //let csrfToken = getCookie('XSRF-TOKEN');
       //localStorage.setItem("XSRF-TOKEN", csrfToken);
 
       setLoggedIn(true);
     } 
-  },[document.cookie])
+  },[jwtAccess])
 
   return(
     <>
