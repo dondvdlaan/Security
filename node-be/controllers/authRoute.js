@@ -33,6 +33,13 @@ const createSession = () => (req,res) => {
 
     console.log("\n ****** in createSession ****** " )
     console.log("auth", req.user[0].userID)
+    console.log("body", req.body)
+
+    if(req.session.passport){
+        console.log("user", req.session.passport) 
+       req.session.passport.user = req.body.username
+    }
+    else if(!req.session) console.log("session does not exist")
     
     // userID is converted in JWR token
     const jwtAccess = generateJwtAccess(req.user[0].userID);

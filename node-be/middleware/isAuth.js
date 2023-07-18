@@ -17,6 +17,9 @@ module.exports = (req, res, next) => {
 
     console.log("\n ****** In is-auth.js ******");
     console.log({authHeader});
+    console.log("\n Req");
+    console.log(req.sessionID);
+    console.log(req.session);
 
     if (!authHeader) {
         const error = new Error('Not authenticated.');

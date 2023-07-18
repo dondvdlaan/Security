@@ -49,11 +49,17 @@ server.use(function(req, res, next) {
  * it only saves the session ID in the cookie itself
  */ 
 server.use(session({
+	name: "Wat voor naam",
 	secret: 'Holita',
 	//key: 'session_cookie_name',
 	store: sessionStore,
 	resave: false,
 	saveUninitialized: false,
+	cookie: {
+ 
+		// Session expires after 1 min of inactivity.
+		expires: 60000
+	}
 }));
 server.use(passport.session());
 server.use(passport.initialize());

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 /**
  * 
  */
-function Login() {
+function LoginNode() {
 
   const[error, setError]  = useState(" ")
   const navigate          = useNavigate();
@@ -20,7 +20,7 @@ function Login() {
   // ---- Event triggers ----
   const onAuth = () =>{
 
-    ApiSimplified("POST","api/auth", cred)
+    ApiSimplified(4500,"POST","api/auth", cred)
     .then(res => {
 
       let accessToken = null
@@ -35,7 +35,7 @@ function Login() {
       localStorage.setItem("X-ACCESS-TOKEN", accessToken);
       localStorage.setItem("X-REFRESH-TOKEN",refreshToken);
 
-      if(res.data) navigate("/home")
+      if(res.data) navigate("/testNode")
     
     })
     .catch(err => console.log("Login err", err))
@@ -44,7 +44,7 @@ function Login() {
   return(
     <>
     <div className="App">
-      <h2>Login</h2>
+      <h2>Login Node</h2>
       <button onClick={onAuth} type="button">Authentication</button>
       <p>{error}</p>
     </div>
@@ -53,4 +53,4 @@ function Login() {
   )
 }
 
-export default Login
+export default LoginNode

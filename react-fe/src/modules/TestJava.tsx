@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { JWT } from '../Types/JWT';
 import { AxiosResponse } from 'axios';
 
-function Home() {
+function TestJava() {
 
   const[error, setError] = useState(" ")
   const navigate = useNavigate();
@@ -17,31 +17,12 @@ function Home() {
 
   //console.log("cookie: ", document.cookie);
 
-  const cred = {
-    username: "testUser",
-    password: "testPW"
-  }
 
   // ---- Event triggers ----
-  const onAuth = () =>{
-
-    ApiSimplified("POST","api/auth", cred)
-    .then((res: AxiosResponse<any, any> )=> {
-      console.log("Auth: " , res.data.jwtAccess)
-      let jwtAccess = res.data.jwtAccess
-      localStorage.setItem("X-ACCESS-TOKEN", jwtAccess);
-      //navigate("/secondPage")
-    })
-    .catch(err => {
-      console.log("AuthErr: " , err.response.data) 
-      setError(err.response.data)
-    })
-  }
-
   
   const onGreet = () =>{
 
-    ApiSimplified("GET","greeting")
+    ApiSimplified(8080, "GET", "greeting")
     .then(res => {
       console.log("Greet cookie: " , res.headers["set-cookie"])
       console.log("Greet: " , res)})
@@ -52,7 +33,7 @@ function Home() {
   }
   const getCSRF = () =>{
 
-    ApiSimplified("GET","csrf-token")
+    ApiSimplified(8080, "GET", "csrf-token")
     .then(res => {
       console.log("getCSRF: " , res.data.token)
     let csrfToken = res.data.token;
@@ -66,7 +47,7 @@ function Home() {
 
   const onCSRF = () =>{
 
-    ApiSimplified("POST","addUser", cred)
+    ApiSimplified(8080, "POST", "addUser")
     .then(res => {
       console.log("onCSRF: " , res)})
   }
@@ -76,14 +57,10 @@ function Home() {
   return (
     <div className="App">
       
-    <h2>Testing Security</h2>
+    <h2>JAVA Testing Security</h2>
     <button onClick={onGreet} type="button">Greeting</button>
     <button onClick={getCSRF} type="button">get CSRF Token</button>
     <button onClick={onCSRF} type="button">POST add names</button>
-    <div>
-      <button onClick={onAuth} type="button">Authentication</button>
-      <p>{error}</p>
-    </div>
     <hr></hr>
 
     <h3>Links</h3>
@@ -104,4 +81,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TestJava;

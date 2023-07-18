@@ -24,6 +24,9 @@ function Logout() {
 
   deleteCookies()
 
+  localStorage.removeItem("X-ACCESS-TOKEN");
+      localStorage.removeItem("X-REFRESH-TOKEN");
+
   return(
     <>
     <div className="App">

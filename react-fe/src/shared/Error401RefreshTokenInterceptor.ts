@@ -7,6 +7,10 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosStatic) => {
 
    let title ="\n ***** In Error401RefreshTokenInterceptor *****"
    console.log(title)
+   let port = 0;
+
+   const refreshToken = localStorage.getItem("X-REFRESH-TOKEN")
+   
 
    axiosInstance.interceptors.response.use( res => {
 
@@ -16,14 +20,15 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosStatic) => {
    }, err => {
 
       const config = err?.config;
+      console.log("Interceptor res err url: ", err.request.responseURL)
 
-         if (err.response.status === 401) {
+      //if(process.env.REACT_APP_JAVA_PORT)
+
+         if ( err.response.status === 401 && refreshToken ) {
            console.log("err.response.status: ", err.response.status)
            console.log("err.request: ", err.request)
 
-           const refreshToken = localStorage.getItem("X-REFRESH-TOKEN")
-
-           ApiSimplified('POST', 'api/auth/refresh', {refreshToken})
+           ApiSimplified(4500, 'POST', 'api/auth/refresh', {refreshToken})
            .then(res => {
             console.log("Error401 resdata", res.data.accessToken)
 

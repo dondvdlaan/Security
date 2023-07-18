@@ -10,14 +10,14 @@ function SecondPage() {
   // ---- Event triggers ----
   const onRetriecTestData = () =>{
 
-    ApiSimplified("get","api/data")
+    ApiSimplified(4500, "get","api/data")
     .then(res => console.log("Data: " , res))
   }
 
   
   const onGreet = () =>{
 
-    ApiSimplified("GET","greeting")
+    ApiSimplified(4500, "GET","greeting")
     .then(res => console.log("Greet: " , res))
   }
 
