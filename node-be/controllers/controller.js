@@ -22,7 +22,7 @@ const controller = (server) =>{
         console.log("\n ************ /greeting *********** \n");
 
         console.log("\n req ")
-        //console.log(req)
+        console.log(req)
 
         /*
           // Create CSRF token to check POST, PUT, DELETE, and PATCH requests

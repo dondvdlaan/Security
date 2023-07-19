@@ -32,7 +32,7 @@ function TestNode() {
       console.log("Greet: " , res)})
     .catch(err =>{
       console.log("foutje: ", err.response.status)
-      if(err.response.status == 401) navigate("/login")
+      if(err.response.status == 401) navigate("/loginNode")
     })
   }
   const getCSRF = () =>{

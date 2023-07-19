@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @CrossOrigin
 @RestController
+@RequestMapping("/javaBE")
 public class GreetingController {
 
 	private static final String template = "Hello, %s!";
@@ -52,7 +53,7 @@ public class GreetingController {
 	}
 
 	@GetMapping("/auth")
-	public String getAuthorization(HttpServletRequest request){
+	public ResponseEntity<String> getAuthorization(HttpServletRequest request){
 
 		String authorization = request.getHeader("Authorization");
 		String base64Credentials = authorization.substring("Basic".length()).trim();
@@ -62,7 +63,7 @@ public class GreetingController {
 		System.out.println("authorization: " + authorization);
 		System.out.println("base64Credentials: " + base64Credentials);
 
-		return credentials;
+		return ResponseEntity.status(HttpStatus.OK).body(credentials);
 	}
 
 }

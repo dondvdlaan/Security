@@ -17,27 +17,30 @@ const baseUrl = `http://localhost:`;
  */
 export function ApiSimplified<T>(port: number, method: Method, path: string, data = {}) {
 
-    let user ="testUser"
-    let pw ="testPW"
+    let user ="testUserJava"
+    let pw ="testPWJava"
     let userAndPW = user + ":" + pw
-    const encodedData = btoa(userAndPW); 
+    const encodedData = window.btoa(userAndPW); 
 
     const config ={
-        withCredentials: false,
+       // withCredentials: false,
         //headers: {'X-Requested-With': 'XMLHttpRequest'},
         //headers: {          'Accept': '*/*'        },
         headers: {
+            'Content-type': 'application/json',
             'Authorization': `Basic ${encodedData}`,
-            'Accept': '*/*' },
+          //  'Accept': '*/*' ,
+          // ' Access-Control-Allow-Origin': 'http://localhost:3000'
+        },
         method,
         url: `${baseUrl}${port}/${path}`,
         data,
     } ;
 
-    console.log('API simple config:',config);
+    console.log('API config:',config);
 
     // ---- Interceptors ----
-    //UpdateHeaderInterceptor(axios);
+    UpdateHeaderInterceptor(axios);
     //Error401RefreshTokenInterceptor(axios);
     //UpdateCookiesInterceptor(axios);
 

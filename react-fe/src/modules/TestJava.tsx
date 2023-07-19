@@ -22,13 +22,13 @@ function TestJava() {
   
   const onGreet = () =>{
 
-    ApiSimplified(8080, "GET", "greeting")
+    ApiSimplified(8080, "GET", "java/BEgreeting")
     .then(res => {
       console.log("Greet cookie: " , res.headers["set-cookie"])
       console.log("Greet: " , res)})
     .catch(err =>{
       console.log("foutje: ", err.response.status)
-      if(err.response.status == 401) navigate("/login")
+      if(err.response.status == 401) navigate("/loginJava")
     })
   }
   const getCSRF = () =>{

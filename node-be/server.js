@@ -56,24 +56,24 @@ server.use(session({
 	resave: false,
 	saveUninitialized: false,
 	cookie: {
- 
-		// Session expires after 1 min of inactivity.
-		expires: 60000
-	}
+		maxAge: 1000 * 60 * 60 * 24,
+		path: "/",
+		httpOnly: false,
+	},
 }));
 server.use(passport.session());
 server.use(passport.initialize());
 //server.use(passport.authenticate('session'));
 
-// ---- Start server ----
+// ---- Initialization ----
 const init = () =>{
 
 	// Routes
     authController(server);
     controller(server);
 
+	// Start server
     server.listen(port, err=> console.log(err || `server at ${port}`))
 }
-
 
 init();

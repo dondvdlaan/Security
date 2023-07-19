@@ -15,6 +15,7 @@
  */
 package com.example.restservice;
 
+import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -25,6 +26,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
@@ -37,16 +41,27 @@ public class GreetingControllerTests {
 	@Test
 	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
 
-		this.mockMvc.perform(get("/greeting")).andDo(print()).andExpect(status().isOk())
+		this.mockMvc.perform(get("/javaBE/greeting")).andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.content").value("Hello, World!"));
 	}
 
 	@Test
 	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
 
-		this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
+		this.mockMvc.perform(get("/javaBE/greeting").param("name", "Spring Community"))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
 	}
 
+	@Test
+	void shouldAcceptCredentials() throws Exception {
+		this.mockMvc.perform(get("/javaBE/auth")).andDo(print()).andExpect(status().isOk());
+	}
+	/*
+		ResponseEntity<String> response = restTemplate
+				.withBasicAuth("sarah1", "abc123") // Add this
+				.getForEntity("/javaBE/auth", String.class);
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+	 */
 }

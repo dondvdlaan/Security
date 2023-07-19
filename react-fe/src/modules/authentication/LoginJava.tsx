@@ -20,7 +20,7 @@ function LoginJava() {
   // ---- Event triggers ----
   const onAuth = () =>{
 
-    ApiSimplified(8080,"GET","auth")
+    ApiSimplified(8080,"GET","javaBE/auth")
     .then(res => {
 
       let accessToken = null

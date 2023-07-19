@@ -14,6 +14,8 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosStatic) => {
 
    axiosInstance.interceptors.response.use( res => {
 
+    console.log("Interceptor res url: ", res)
+
    // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
    return res
