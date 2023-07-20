@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import '../App.css';
-import { ApiSimplified } from '../shared/Api';
+import { ApiNodeSimplified } from '../shared/ApiNodeBe';
 import { Link } from 'react-router-dom';
 
 function SecondPage() {
@@ -10,14 +10,14 @@ function SecondPage() {
   // ---- Event triggers ----
   const onRetriecTestData = () =>{
 
-    ApiSimplified(4500, "get","api/data")
+    ApiNodeSimplified("get","api/data")
     .then(res => console.log("Data: " , res))
   }
 
   
   const onGreet = () =>{
 
-    ApiSimplified(4500, "GET","greeting")
+    ApiNodeSimplified("GET","greeting")
     .then(res => console.log("Greet: " , res))
   }
 

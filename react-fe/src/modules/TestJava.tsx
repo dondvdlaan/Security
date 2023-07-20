@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import '../App.css';
-import { ApiSimplified } from '../shared/Api';
+import { ApiJavaSimplified } from '../shared/ApiJavaBE';
 import { Link, useNavigate } from 'react-router-dom';
 import { JWT } from '../Types/JWT';
 import { AxiosResponse } from 'axios';
@@ -22,10 +22,9 @@ function TestJava() {
   
   const onGreet = () =>{
 
-    ApiSimplified(8080, "GET", "java/BEgreeting")
+    ApiJavaSimplified("GET", "javaBE/greeting")
     .then(res => {
-      console.log("Greet cookie: " , res.headers["set-cookie"])
-      console.log("Greet: " , res)})
+      console.log("onGreet: " , res)})
     .catch(err =>{
       console.log("foutje: ", err.response.status)
       if(err.response.status == 401) navigate("/loginJava")
@@ -33,7 +32,7 @@ function TestJava() {
   }
   const getCSRF = () =>{
 
-    ApiSimplified(8080, "GET", "csrf-token")
+    ApiJavaSimplified("GET", "csrf-token")
     .then(res => {
       console.log("getCSRF: " , res.data.token)
     let csrfToken = res.data.token;
@@ -47,7 +46,7 @@ function TestJava() {
 
   const onCSRF = () =>{
 
-    ApiSimplified(8080, "POST", "addUser")
+    ApiJavaSimplified("POST", "addUser")
     .then(res => {
       console.log("onCSRF: " , res)})
   }

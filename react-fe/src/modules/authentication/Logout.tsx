@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../App.css';
-import { ApiSimplified } from '../../shared/Api';
+import { ApiNodeSimplified } from '../../shared/ApiNodeBe';
 import { Link, useNavigate } from 'react-router-dom';
 
 

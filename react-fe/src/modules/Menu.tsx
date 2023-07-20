@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import '../App.css';
-import { ApiSimplified } from '../shared/Api';
+import { ApiNodeSimplified } from '../shared/ApiNodeBe';
 import { Link, useNavigate } from 'react-router-dom';
 import { JWT } from '../Types/JWT';
 import { AxiosResponse } from 'axios';

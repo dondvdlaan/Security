@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../App.css';
-import { ApiSimplified } from '../../shared/Api';
+import { ApiNodeSimplified } from '../../shared/ApiNodeBe';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -20,8 +20,8 @@ function LoginNode() {
   // ---- Event triggers ----
   const onAuth = () =>{
 
-    ApiSimplified(4500,"POST","api/auth", cred)
-    .then(res => {
+    ApiNodeSimplified("POST","api/auth", cred)
+    .then((res: any) => {
 
       let accessToken = null
       let refreshToken = null

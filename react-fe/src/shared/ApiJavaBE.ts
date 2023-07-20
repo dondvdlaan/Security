@@ -5,7 +5,16 @@ import Error401RefreshTokenInterceptor from "./Error401RefreshTokenInterceptor";
 
 // ********************* Constanten und Typen *********************
 const baseUrl = `http://localhost:`;
-//const baseUrl = `http://localhost:4500/`;
+const port    = process.env.REACT_APP_JAVA_PORT
+
+const encodedData = () =>{
+
+    let user            ="testUserJava"
+    let pw              ="testPWJava"
+    let userAndPW       = user + ":" + pw
+    const encodedData   = window.btoa(userAndPW); 
+    return encodedData
+}
 
 /**
  * Simplified Api for direct calling server and without callback function
@@ -15,22 +24,12 @@ const baseUrl = `http://localhost:`;
  * @param   data    [JSON]        : optionally data can be send with message
  * @return  axios   [AxiosPromise]: return message to be captured with .then
  */
-export function ApiSimplified<T>(port: number, method: Method, path: string, data = {}) {
-
-    let user ="testUserJava"
-    let pw ="testPWJava"
-    let userAndPW = user + ":" + pw
-    const encodedData = window.btoa(userAndPW); 
+export function ApiJavaSimplified<T>(method: Method, path: string, data = {}) {
 
     const config ={
-       // withCredentials: false,
-        //headers: {'X-Requested-With': 'XMLHttpRequest'},
-        //headers: {          'Accept': '*/*'        },
         headers: {
             'Content-type': 'application/json',
-            'Authorization': `Basic ${encodedData}`,
-          //  'Accept': '*/*' ,
-          // ' Access-Control-Allow-Origin': 'http://localhost:3000'
+            'Authorization': `Basic ${encodedData()}`,
         },
         method,
         url: `${baseUrl}${port}/${path}`,
@@ -40,13 +39,12 @@ export function ApiSimplified<T>(port: number, method: Method, path: string, dat
     console.log('API config:',config);
 
     // ---- Interceptors ----
-    UpdateHeaderInterceptor(axios);
+    //UpdateHeaderInterceptor(axios);
     //Error401RefreshTokenInterceptor(axios);
     //UpdateCookiesInterceptor(axios);
 
-
-    
     return axios(config)
     // .then((response: AxiosResponse<T>) => response.data);
     // .then((response: AxiosResponse<T>) => console.log('response.data: ', response.data));
 }
+

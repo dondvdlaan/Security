@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import '../App.css';
-import { ApiSimplified } from '../shared/Api';
+import { ApiNodeSimplified } from '../shared/ApiNodeBe';
 import { Link, useNavigate } from 'react-router-dom';
 import { JWT } from '../Types/JWT';
 import { AxiosResponse } from 'axios';
@@ -17,17 +17,12 @@ function TestNode() {
 
   //console.log("cookie: ", document.cookie);
 
-  const cred = {
-    username: "testUser",
-    password: "testPW"
-  }
-
   // ---- Event triggers ----
   
   const onGreet = () =>{
 
-    ApiSimplified(4500, "GET","greeting")
-    .then(res => {
+    ApiNodeSimplified("GET","greeting")
+    .then((res: any) => {
       console.log("Greet cookie: " , res.headers["set-cookie"])
       console.log("Greet: " , res)})
     .catch(err =>{
@@ -37,8 +32,8 @@ function TestNode() {
   }
   const getCSRF = () =>{
 
-    ApiSimplified(4500, "GET","csrf-token")
-    .then(res => {
+    ApiNodeSimplified("GET","csrf-token")
+    .then((res: any) => {
       console.log("getCSRF: " , res.data.token)
     let csrfToken = res.data.token;
     localStorage.setItem("x-csrf-test", csrfToken);
@@ -51,7 +46,7 @@ function TestNode() {
 
   const onCSRF = () =>{
 
-    ApiSimplified(4500, "POST","addUser", )
+    ApiNodeSimplified("POST","addUser", )
     .then(res => {
       console.log("onCSRF: " , res)})
   }
@@ -61,7 +56,7 @@ function TestNode() {
   return (
     <div className="App">
       
-    <h2>Testing Security</h2>
+    <h2>NODE Testing Security</h2>
     <button onClick={onGreet} type="button">Greeting</button>
     <button onClick={getCSRF} type="button">get CSRF Token</button>
     <button onClick={onCSRF} type="button">POST add names</button>

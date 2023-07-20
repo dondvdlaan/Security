@@ -1,8 +1,8 @@
-import { AxiosStatic } from "axios";
+import { AxiosInstance, AxiosStatic } from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-const UpdateCookiesInterceptor = (axiosInstance: AxiosStatic) => {
+const UpdateCookiesInterceptor = (axiosInstance: AxiosInstance) => {
 
    const navigate = useNavigate();
 

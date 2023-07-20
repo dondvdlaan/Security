@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { ApiSimplified } from './shared/Api';
+import { ApiNodeSimplified } from './shared/ApiNodeBe';
 
 import { BrowserRouter } from 'react-router-dom';
 import Routing from './modules/Routing';

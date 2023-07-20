@@ -1,8 +1,8 @@
-import { AxiosStatic } from "axios";
+import { AxiosInstance, AxiosStatic } from "axios";
 //import getCookie from 
 
 
-const UpdateHeaderInterceptor = (axiosInstance: AxiosStatic) => {
+const UpdateHeaderInterceptor = (axiosInstance: AxiosInstance) => {
 
 axiosInstance.interceptors.request.use((config) => {
 

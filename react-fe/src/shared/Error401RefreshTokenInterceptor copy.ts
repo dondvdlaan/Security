@@ -1,20 +1,13 @@
-import { AxiosInstance, AxiosStatic } from "axios";
+import axios,{ AxiosStatic } from "axios";
 import { ApiNodeSimplified } from "./ApiNodeBe";
 //import getCookie from 
 
 
-const Error401RefreshTokenInterceptor = (axiosInstance: AxiosInstance) => {
 
-   let title ="\n ***** In Error401RefreshTokenInterceptor *****"
-   console.log(title)
-   let port = 0;
+   const Error401RefreshTokenInterceptor = axios.interceptors.response.use( res => {
 
-   const refreshToken = localStorage.getItem("X-REFRESH-TOKEN")
-   
-
-   axiosInstance.interceptors.response.use( res => {
-
-    console.log("Interceptor res url: ", res)
+    console.log("\n **** Interceptor res url ****")
+    console.log(res)
 
    // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -22,16 +15,15 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosInstance) => {
    }, err => {
 
       const config = err?.config;
+      const refreshToken = localStorage.getItem("X-REFRESH-TOKEN")
       console.log("Interceptor res err url: ", err.request.responseURL)
-
-      //if(process.env.REACT_APP_JAVA_PORT)
 
          if ( err.response.status === 401 && refreshToken ) {
            console.log("err.response.status: ", err.response.status)
            console.log("err.request: ", err.request)
 
            ApiNodeSimplified('POST', 'api/auth/refresh', {refreshToken})
-           .then((res: any )=> {
+           .then((res: any) => {
             console.log("Error401 resdata", res.data.accessToken)
 
             const accessToken = res.data.accessToken
@@ -51,13 +43,11 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosInstance) => {
             console.log("err in refersh:", err)
            })
            
-            
-           return axiosInstance(config);
+           return axios(config);
          }
       
 
    return Promise.reject(err);
    })
    
-};
 export default Error401RefreshTokenInterceptor;

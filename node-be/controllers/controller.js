@@ -4,65 +4,26 @@ const sameOrigin        = require("../middleware/sameOrigin");
 
 const controller = (server) =>{
 
-
-    server.post('/addUser', sameOrigin, isAuth, (req, res) =>{
+    server.post('/addUser', 
+        sameOrigin, 
+        isAuth, 
+        (req, res) =>{
 
         console.log("\n ************ /addUser *********** \n");
-
         console.log("user:", req.body)
 
         res.sendStatus(200);
-
     }),
 
     server.get('/greeting', 
-    isAuth,
-     (req, res) =>{
+        isAuth,
+        (req, res) =>{
 
         console.log("\n ************ /greeting *********** \n");
 
         console.log("\n req ")
         console.log(req)
 
-        /*
-          // Create CSRF token to check POST, PUT, DELETE, and PATCH requests
-          res.cookie("XSRF-TOKEN", req.csrfToken(), {
-            path: "/",
-            httpOnly: false,
-        });
-        */
-        /*
-        console.log("\n session data");
-        console.log(req.session);
-
-        console.log("session ID");
-        console.log(req.sessionID);
-        
-        //res.cookie("TEST", "TESTABC", {
-        //    path: "/",
-        //    httpOnly: false,
-        //});
-
-        //console.dir("REQ")
-        //console.log(req);
-
-        console.log("Headers")
-        console.log(req.headers['X-XSRF-TOKEN']);
-
-        console.log("\n req Headers")
-        console.log(req.headers);
-
-        //console.dir("Headers token")
-        //const authHeader = req.headers;
-        //const token = authHeader["authorization"];
-        //console.log(token);
-
-        console.log("Session Cookie")
-        console.log(req.session.cookie)
-
-        console.log("\n Cookie")
-        console.log(req.cookies)
-        */
         res.send("Good day")
     }),
     server.get('/greeting2', (req, res) =>{
