@@ -22,6 +22,9 @@ function Menu() {
             <Link to="/loginJava">Java</Link>
           </li>
           <li>
+            <Link to="/loginJakarta">Jakarta</Link>
+          </li>
+          <li>
             <Link to="/logout">Uitlogge...</Link>
           </li>
         </ul>

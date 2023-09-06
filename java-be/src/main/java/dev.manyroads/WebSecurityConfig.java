@@ -11,15 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.Base64;
-
 import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
- * SecurityConfig is configuration Bean for Spring Security and called prior to the Controller
+ * WebSecurityConfig for configurations of Beans and called prior to the Controller
  */
 @Configuration
-public class SecurityConfig {
+public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,24 +31,9 @@ public class SecurityConfig {
                 .csrf((csrf) -> csrf.disable())
                  */
                 .cors(withDefaults())
+                // Basic authentication is used
                 .httpBasic(withDefaults());
 
         return http.build();
-    }
-    @Bean
-    public UserDetailsService testOnlyUsers(PasswordEncoder passwordEncoder) {
-
-        User.UserBuilder users = User.builder();
-        UserDetails testUser = users
-                .username("testUserJava")
-                .password(passwordEncoder.encode("testPWJava"))
-                .roles() // No roles for now
-                .build();
-
-        return new InMemoryUserDetailsManager(testUser);
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
