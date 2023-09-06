@@ -1,5 +1,24 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# *** JAVA ***
+*.DS_Store
+*.sw?
+.#*
+*#
+*~
+.classpath
+.project
+.settings
+bin
+build
+target
+dependency-reduced-pom.xml
+*.sublime-*
+/scratch
+.gradle
+README.html
+*.iml
+.idea
 
+# *** Node, JS ***
 # dependencies
 /node_modules
 /.pnp
