@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, Method } from "axios";
-import UpdateHeaderInterceptor from './UpdateHeaderInterceptor'
-import UpdateCookiesInterceptor from "./UpdateCookiesInterceptor";
-import Error401RefreshTokenInterceptor from "./Error401RefreshTokenInterceptor";
+import UpdateHeaderInterceptor from '../interceptor/UpdateHeaderInterceptor'
+import UpdateCookiesInterceptor from "../interceptor/UpdateCookiesInterceptor";
+import Error401RefreshTokenInterceptor from "../interceptor/Error401RefreshTokenInterceptor";
 
 // ********************* Constanten und Typen *********************
 const baseUrl   = `http://localhost:`;

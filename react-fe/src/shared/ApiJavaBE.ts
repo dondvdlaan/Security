@@ -1,7 +1,7 @@
 import axios, { Method } from "axios";
-import UpdateHeaderInterceptor from './UpdateHeaderInterceptor'
-import UpdateCookiesInterceptor from "./UpdateCookiesInterceptor";
-import Error401RefreshTokenInterceptor from "./Error401RefreshTokenInterceptor";
+import UpdateHeaderInterceptor from '../interceptor/UpdateHeaderInterceptor'
+import UpdateCookiesInterceptor from "../interceptor/UpdateCookiesInterceptor";
+import Error401RefreshTokenInterceptor from "../interceptor/Error401RefreshTokenInterceptor";
 
 // ********************* Constanten und Typen *********************
 const baseUrl = `http://localhost:`;
@@ -9,8 +9,8 @@ const port    = process.env.REACT_APP_JAVA_PORT
 
 const encodedData = () =>{
 
-    let user            ="testUserJava"
-    let pw              ="testPWJava"
+    let user            ="test"
+    let pw              ="testPW"
     let userAndPW       = user + ":" + pw
     const encodedData   = window.btoa(userAndPW); 
     return encodedData
@@ -30,6 +30,7 @@ export function ApiJavaSimplified<T>(method: Method, path: string, data = {}) {
         headers: {
             'Content-type': 'application/json',
             'Authorization': `Basic ${encodedData()}`,
+            'RequestID': `patito`
         },
         method,
         url: `${baseUrl}${port}/${path}`,

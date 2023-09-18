@@ -22,7 +22,7 @@ function Menu() {
             <Link to="/loginJava">Java</Link>
           </li>
           <li>
-            <Link to="/loginJakarta">Jakarta</Link>
+            <Link to="/loginJava2">Java2</Link>
           </li>
           <li>
             <Link to="/logout">Uitlogge...</Link>

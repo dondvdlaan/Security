@@ -1,9 +1,10 @@
-package dev.manyroads;
+package dev.manyroads.controller;
 
+import dev.manyroads.model.Greeting;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
@@ -22,6 +23,9 @@ public class GreetingController {
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
 
+	/*
+	Example "curl -v 'GET' "http://localhost:8090/javaBE/greeting?name=ikke" -u test2:testPW2"
+	 */
 	@GetMapping("/greeting")
 	public Greeting greeting(
 			@RequestParam(value = "name", defaultValue = "World") String name,
@@ -53,8 +57,11 @@ public class GreetingController {
 	}
 
 	@GetMapping("/auth")
-	public ResponseEntity<String> getAuthorization(HttpServletRequest request){
+	public ResponseEntity<String> getAuthorization(
+			HttpServletRequest request,
+			Authentication authentication){
 
+		/*
 		String authorization = request.getHeader("Authorization");
 		String base64Credentials = authorization.substring("Basic".length()).trim();
 		byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
@@ -62,8 +69,26 @@ public class GreetingController {
 
 		System.out.println("authorization: " + authorization);
 		System.out.println("base64Credentials: " + base64Credentials);
+		 */
+		Enumeration<String> headerNames = request.getHeaderNames();
 
-		return ResponseEntity.status(HttpStatus.OK).body(credentials);
+		while(headerNames.hasMoreElements()){
+			System.out.println(headerNames.nextElement());
+		}
+		// Retrieve form security context name from client
+		return ResponseEntity.status(HttpStatus.OK).body("All right " + authentication.getName());
 	}
 
+	@GetMapping("/")
+	public ResponseEntity<String> getAuthLoginForm(){
+
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Redirect to Login Form");
+	}
+	@PostMapping("/lijntje/{code}")
+	public String ontvangLijntje(
+			@PathVariable String code,
+			@RequestBody String lijntje){
+
+		return lijntje + " " + code;
+	}
 }

@@ -12,4 +12,6 @@ a limited XSRF check is conducted on the POST request, when a user logs in.
   backend
   You can test that with
    curl -i --user testUserJava:testPWJava http://localhost:8080/javaBE/auth
+- For Java2/Spring backend standard Basic authentication is used only for login. Subsequent 
+  request are authorized with a JWT token. Every x s the JWT token is refreshed.
 

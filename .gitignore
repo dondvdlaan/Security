@@ -20,7 +20,7 @@ README.html
 
 # *** Node, JS ***
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 

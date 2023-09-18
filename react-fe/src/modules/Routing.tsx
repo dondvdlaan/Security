@@ -6,11 +6,11 @@ import Login from './authentication/LoginNode';
 import Logout from './authentication/Logout';
 import LoginNode from './authentication/LoginNode';
 import LoginJava from './authentication/LoginJava';
+import LoginJava2 from './authentication/LoginJava2';
 import Menu from './Menu';
-import TestJakarta from './TestJakarta';
+import TestJava2 from './TestJava2';
 import TestNode from './TestNode';
 import LogoutNode from './authentication/LogoutNode';
-import LoginJakarta from './authentication/LoginJakarta';
 
 
 function Routing() {
@@ -22,11 +22,11 @@ function Routing() {
         <Route path="/loginNode"         element={<LoginNode />} />
         <Route path="/logoutNode"         element={<LogoutNode />} />
         <Route path="/loginJava"         element={<LoginJava />} />
-        <Route path="/loginJakarta"         element={<LoginJakarta />} />
+        <Route path="/loginJava2"         element={<LoginJava2 />} />
         <Route path="/secondPage"    element={<SecondPage />} />
         <Route path="/testNode"          element={<TestNode />} />
         <Route path="/testJava"          element={<TestJava />} />
-        <Route path="/testJakarta"          element={<TestJakarta />} />
+        <Route path="/testJava2"          element={<TestJava2 />} />
         <Route path="/menu"          element={<Menu />} />
         <Route path="/"     element={<Navigate to="/menu" />} />
       { /* <Route path="/login"          element={<Login children />} /> */}

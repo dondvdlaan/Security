@@ -1,5 +1,5 @@
-import { AxiosInstance, AxiosStatic } from "axios";
-import { ApiNodeSimplified } from "./ApiNodeBe";
+import { AxiosInstance } from "axios";
+import { ApiNodeSimplified } from "../shared/ApiNodeBe";
 //import getCookie from 
 
 
@@ -14,7 +14,7 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosInstance) => {
 
    axiosInstance.interceptors.response.use( res => {
 
-    console.log("Interceptor res url: ", res)
+    console.log("Interceptor 2xx res url: ", res)
 
    // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
@@ -48,7 +48,7 @@ const Error401RefreshTokenInterceptor = (axiosInstance: AxiosInstance) => {
              if (res) config.headers["X-ACCESS-TOKEN"] = res.data.accessToken;
            })
            .catch(err =>{
-            console.log("err in refersh:", err)
+              console.log("err in refersh:", err)
            })
            
             

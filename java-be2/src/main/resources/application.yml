@@ -1,0 +1,7 @@
+# Server port on localhost
+server.port: 8091
+
+# Token key
+secret: 1234
+# Token Duration in s
+tokenDuration: 15
