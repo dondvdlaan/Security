@@ -1,0 +1,2 @@
+# Set time-out inactivity programmable or in the application file
+server.servlet.session.timeout: 10
